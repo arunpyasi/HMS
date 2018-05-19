@@ -58,7 +58,6 @@ public class MainMenu extends javax.swing.JFrame {
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
 
         jMenu6.setText("jMenu6");
 
@@ -249,14 +248,6 @@ public class MainMenu extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem12);
 
-        jMenuItem15.setText("Contact");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem15);
-
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
@@ -359,11 +350,6 @@ public class MainMenu extends javax.swing.JFrame {
     frm.setVisible(true);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
-    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-     Contact frm = new Contact();
-     frm.setVisible(true);
-    }//GEN-LAST:event_jMenuItem15ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -417,7 +403,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
