@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Raj
  */
 public class Nurse_Wardboy extends javax.swing.JFrame {
 Connection con=null;

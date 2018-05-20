@@ -72,7 +72,7 @@
                       <Component id="Save" alignment="0" max="32767" attributes="0"/>
                       <Component id="Delete" alignment="0" max="32767" attributes="0"/>
                       <Component id="Update" alignment="0" max="32767" attributes="0"/>
-                      <Component id="GetData" alignment="0" pref="85" max="32767" attributes="0"/>
+                      <Component id="GetData" alignment="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

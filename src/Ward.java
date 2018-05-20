@@ -16,7 +16,6 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Raj
  */
 public class Ward extends javax.swing.JFrame {
 Connection con=null;

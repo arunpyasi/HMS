@@ -5,7 +5,6 @@
 
 /**
  *
- * @author Raj
  */
 import java.sql.*;
 import javax.swing.*;

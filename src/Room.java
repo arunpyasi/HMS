@@ -16,7 +16,6 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Raj
  */
 public class Room extends javax.swing.JFrame {
 Connection con=null;

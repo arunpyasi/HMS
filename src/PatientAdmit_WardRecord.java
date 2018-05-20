@@ -12,7 +12,6 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Raj
  */
 public class PatientAdmit_WardRecord extends javax.swing.JFrame {
 Connection con=null;
