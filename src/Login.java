@@ -173,6 +173,7 @@ public class Login extends javax.swing.JFrame {
             while (rs.next()) {
                 String securepassword = rs.getString("password");
                 String salt = rs.getString("salt");
+                System.out.println(salt);
                 boolean passwordMatch = PasswordUtils.verifyUserPassword(Password, securepassword, salt);
                 if (passwordMatch) {
                     this.hide();
@@ -211,18 +212,18 @@ public class Login extends javax.swing.JFrame {
             try {
                 pst = con.prepareStatement(sql);
                 rs = pst.executeQuery();
-                   while (rs.next()) {
-                String securepassword = rs.getString("password");
-                String salt = rs.getString("salt");
-                boolean passwordMatch = PasswordUtils.verifyUserPassword(Password, securepassword, salt);
-                if (passwordMatch) {
-                    this.hide();
-                    MainMenu frm = new MainMenu();
-                    frm.setVisible(true);
-                } else {
+                while (rs.next()) {
+                    String securepassword = rs.getString("password");
+                    String salt = rs.getString("salt");
+                    boolean passwordMatch = PasswordUtils.verifyUserPassword(Password, securepassword, salt);
+                    if (passwordMatch) {
+                        this.hide();
+                        MainMenu frm = new MainMenu();
+                        frm.setVisible(true);
+                    } else {
 
-                    JOptionPane.showMessageDialog(null, "Login Failed.. Try again !", "Access denied", JOptionPane.ERROR_MESSAGE);
-                }
+                        JOptionPane.showMessageDialog(null, "Login Failed.. Try again !", "Access denied", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             } catch (SQLException | HeadlessException e) {
                 JOptionPane.showMessageDialog(null, e);
