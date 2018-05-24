@@ -9,34 +9,37 @@ import net.proteanit.sql.DbUtils;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  */
 public class DoctorRecord extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
     /**
      * Creates new form DoctorRecord
      */
     public DoctorRecord() {
         initComponents();
-         con= Connect.ConnectDB();
+        con = Connect.ConnectDB();
         Get_Data();
         setLocationRelativeTo(null);
     }
- private void Get_Data(){
-      String sql="select DoctorID as 'Doctor ID', DoctorName as 'Doctor Name',FatherName as 'Father Name',Address,ContactNo as 'Contact No',Email as 'Email ID',Qualifications,Specialization,Gender,BloodGroup as 'Blood Group',DateOfJoining as 'Joining Date' from Doctor order by DoctorName";        
-      try{
-         pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
-         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
-         }catch(Exception e){
+
+    private void Get_Data() {
+        String sql = "select DoctorID as 'Doctor ID', DoctorName as 'Doctor Name',FatherName as 'Father Name',Address,ContactNo as 'Contact No',Email as 'Email ID',Qualifications,Specialization,Gender,BloodGroup as 'Blood Group',DateOfJoining as 'Joining Date' from Doctor order by DoctorName";
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-          
-}
+
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,53 +94,53 @@ PreparedStatement pst=null;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-       try{
-            con=Connect.ConnectDB();
-            int row= jTable1.getSelectedRow();
-            String table_click= jTable1.getModel().getValueAt(row, 0).toString();
-            String sql= "select * from Doctor where DoctorID = '" + table_click + "'";
-            pst=con.prepareStatement(sql);
-            rs=  pst.executeQuery();
-            if(rs.next()){
+        try {
+            con = Connect.ConnectDB();
+            int row = jTable1.getSelectedRow();
+            String table_click = jTable1.getModel().getValueAt(row, 0).toString();
+            String sql = "select * from Doctor where DoctorID = '" + table_click + "'";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
                 this.hide();
                 Doctor frm = new Doctor();
                 frm.setVisible(true);
-                String add1=rs.getString("DoctorID");
+                String add1 = rs.getString("DoctorID");
                 frm.txtDoctorID.setText(add1);
-                String add2=rs.getString("Doctorname");
+                String add2 = rs.getString("Doctorname");
                 frm.txtDoctorName.setText(add2);
-                String add3=rs.getString("Fathername");
+                String add3 = rs.getString("Fathername");
                 frm.txtFathername.setText(add3);
-                String add5=rs.getString("Email");
+                String add5 = rs.getString("Email");
                 frm.txtEmailID.setText(add5);
-                String add6=rs.getString("Qualifications");
+                String add6 = rs.getString("Qualifications");
                 frm.txtQualifications.setText(add6);
-                String add7=rs.getString("Specialization");
+                String add7 = rs.getString("Specialization");
                 frm.txtSpecialisation.setText(add7);
-                String add9=rs.getString("BloodGroup");
+                String add9 = rs.getString("BloodGroup");
                 frm.cmbBloodGroup.setSelectedItem(add9);
-                String add11=rs.getString("Gender");
+                String add11 = rs.getString("Gender");
                 frm.cmbGender.setSelectedItem(add11);
-                String add14=rs.getString("DateOfJoining");
+                String add14 = rs.getString("DateOfJoining");
                 frm.txtDateOfJoining.setText(add14);
-                String add15=rs.getString("Address");
+                String add15 = rs.getString("Address");
                 frm.txtAddress.setText(add15);
-                String add16=rs.getString("ContactNo");
+                String add16 = rs.getString("ContactNo");
                 frm.txtContactNo.setText(add16);
                 frm.btnUpdate.setEnabled(true);
                 frm.btnDelete.setEnabled(true);
                 frm.btnSave.setEnabled(false);
-             
+
             }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       this.hide();
-       Doctor frm = new Doctor();
-       frm.setVisible(true);
+        this.hide();
+        Doctor frm = new Doctor();
+        frm.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     /**

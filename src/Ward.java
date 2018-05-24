@@ -13,46 +13,49 @@ import net.proteanit.sql.DbUtils;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  */
 public class Ward extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
     /**
      * Creates new form Ward
      */
     public Ward() {
         initComponents();
-         con= Connect.ConnectDB();
+        con = Connect.ConnectDB();
         Get_Data();
         setLocationRelativeTo(null);
     }
-    private void Reset()
-{
-    txtWardName.setText("");
-    txtCharges.setText("");
-    cmbWardType.setSelectedIndex(-1);
-    txtNoOfbeds.setText("");
-    btnSave.setEnabled(true);
-    btnDelete.setEnabled(false);
-    btnUpdate.setEnabled(false);
-    txtWardName.requestDefaultFocus();
-    Get_Data();
-}
- private void Get_Data(){
-          String sql="select wardname as 'ward name',wardtype as 'Ward Type',NoOfBeds as 'No Of Beds',Charges from ward";
-          try{
-         pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
-         Room_table.setModel(DbUtils.resultSetToTableModel(rs));
-         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-          
-}
+
+    private void Reset() {
+        txtWardName.setText("");
+        txtCharges.setText("");
+        cmbWardType.setSelectedIndex(-1);
+        txtNoOfbeds.setText("");
+        btnSave.setEnabled(true);
+        btnDelete.setEnabled(false);
+        btnUpdate.setEnabled(false);
+        txtWardName.requestDefaultFocus();
+        Get_Data();
     }
+
+    private void Get_Data() {
+        String sql = "select wardname as 'ward name',wardtype as 'Ward Type',NoOfBeds as 'No Of Beds',Charges from ward";
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            Room_table.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -291,77 +294,75 @@ PreparedStatement pst=null;
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        try{
-            con=Connect.ConnectDB();
+        try {
+            con = Connect.ConnectDB();
             if (txtWardName.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter ward name","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter the ward name", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (cmbWardType.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please select ward type","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please select the ward type", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (txtNoOfbeds.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter no. of beds","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter the number of beds", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-           if (txtCharges.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter charges","Error", JOptionPane.ERROR_MESSAGE);
+            if (txtCharges.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter the scharges", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             Statement stmt;
-            stmt= con.createStatement();
-            String sql1="Select Wardname from ward where wardname= '" + txtWardName.getText() + "'";
-            rs=stmt.executeQuery(sql1);
-            if(rs.next()){
-                JOptionPane.showMessageDialog( this, "ward name already exists","Error", JOptionPane.ERROR_MESSAGE);
+            stmt = con.createStatement();
+            String sql1 = "Select Wardname from ward where wardname= '" + txtWardName.getText() + "'";
+            rs = stmt.executeQuery(sql1);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(this, "the selected ward name already exists", "Error", JOptionPane.ERROR_MESSAGE);
                 txtWardName.setText("");
                 txtWardName.requestDefaultFocus();
                 return;
             }
 
-            String sql= "insert into ward(Wardname,wardType,NoOfBeds,Charges)values('"+ txtWardName.getText() + "','"+ cmbWardType.getSelectedItem() + "'," + txtNoOfbeds.getText() + "," + txtCharges.getText() + ")";
-            pst=con.prepareStatement(sql);
+            String sql = "insert into ward(Wardname,wardType,NoOfBeds,Charges)values('" + txtWardName.getText() + "','" + cmbWardType.getSelectedItem() + "'," + txtNoOfbeds.getText() + "," + txtCharges.getText() + ")";
+            pst = con.prepareStatement(sql);
             pst.execute();
 
-            JOptionPane.showMessageDialog(this,"Successfully saved","Ward Record",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Successfully saved", "Ward Record", JOptionPane.INFORMATION_MESSAGE);
             btnSave.setEnabled(false);
             Get_Data();
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        try{
-            con=Connect.ConnectDB();
-            String sql= "update Ward set Wardtype='"+ cmbWardType.getSelectedItem() + "',NoOfBeds=" + txtNoOfbeds.getText() + ",Charges=" + txtCharges.getText() + " where Wardname='" + txtWardName.getText() + "'";
-            pst=con.prepareStatement(sql);
+        try {
+            con = Connect.ConnectDB();
+            String sql = "update Ward set Wardtype='" + cmbWardType.getSelectedItem() + "',NoOfBeds=" + txtNoOfbeds.getText() + ",Charges=" + txtCharges.getText() + " where Wardname='" + txtWardName.getText() + "'";
+            pst = con.prepareStatement(sql);
             pst.execute();
-            JOptionPane.showMessageDialog(this,"Successfully updated","Room Record",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Successfully updated", "Room Record", JOptionPane.INFORMATION_MESSAGE);
             btnUpdate.setEnabled(false);
             Get_Data();
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        try
-        {
-            int P = JOptionPane.showConfirmDialog(null," Are you sure want to delete ?","Confirmation",JOptionPane.YES_NO_OPTION);
-            if (P==0)
-            {
-                con=Connect.ConnectDB();
+        try {
+            int P = JOptionPane.showConfirmDialog(null, " Are you sure you wanna delete ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (P == 0) {
+                con = Connect.ConnectDB();
 
-                String sql= "delete from ward where wardname = '" + txtWardName.getText() + "'";
-                pst=con.prepareStatement(sql);
+                String sql = "delete from ward where wardname = '" + txtWardName.getText() + "'";
+                pst = con.prepareStatement(sql);
                 pst.execute();
-                JOptionPane.showMessageDialog(this,"Successfully deleted","Record",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Successfully deleted", "Record", JOptionPane.INFORMATION_MESSAGE);
                 Reset();
             }
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
@@ -371,49 +372,49 @@ PreparedStatement pst=null;
     }//GEN-LAST:event_btnGetDataActionPerformed
 
     private void Room_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Room_tableMouseClicked
-        try{
-            con=Connect.ConnectDB();
-            int row= Room_table.getSelectedRow();
-            String table_click= Room_table.getModel().getValueAt(row, 0).toString();
-            String sql= "select * from ward where wardname = '" + table_click + "'";
-            pst=con.prepareStatement(sql);
-            rs=  pst.executeQuery();
-            if(rs.next()){
+        try {
+            con = Connect.ConnectDB();
+            int row = Room_table.getSelectedRow();
+            String table_click = Room_table.getModel().getValueAt(row, 0).toString();
+            String sql = "select * from ward where wardname = '" + table_click + "'";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
 
-                String add1=rs.getString("Wardname");
+                String add1 = rs.getString("Wardname");
                 txtWardName.setText(add1);
-                String add2=rs.getString("Wardtype");
+                String add2 = rs.getString("Wardtype");
                 cmbWardType.setSelectedItem(add2);
                 int add3 = rs.getInt("NoOfBeds");
-                String add4= Integer.toString(add3);
+                String add4 = Integer.toString(add3);
                 txtNoOfbeds.setText(add4);
-                 int add5 = rs.getInt("Charges");
-                String add6= Integer.toString(add5);
+                int add5 = rs.getInt("Charges");
+                String add6 = Integer.toString(add5);
                 txtCharges.setText(add6);
                 btnUpdate.setEnabled(true);
                 btnDelete.setEnabled(true);
                 btnSave.setEnabled(false);
 
             }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_Room_tableMouseClicked
 
     private void txtChargesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChargesKeyTyped
-        char c=evt.getKeyChar();
-      if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
-          getToolkit().beep();
-          evt.consume();
-    }          
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtChargesKeyTyped
 
     private void txtNoOfbedsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoOfbedsKeyTyped
-       char c=evt.getKeyChar();
-      if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
-          getToolkit().beep();
-          evt.consume();
-    }          
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNoOfbedsKeyTyped
 
     /**

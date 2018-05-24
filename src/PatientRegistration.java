@@ -12,14 +12,15 @@ import javax.swing.JOptionPane;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  */
 public class PatientRegistration extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
     /**
      * Creates new form PatientRegistration
      */
@@ -27,23 +28,24 @@ PreparedStatement pst=null;
         initComponents();
         setLocationRelativeTo(null);
     }
-private void Reset()
-{
-    txtPatientID.setText("");
-    txtPatientName.setText("");
-    txtFathername.setText("");
-    txtContactNo.setText("");
-    txtAddress.setText("");
-    txtAge.setText("");
-    txtEmailID.setText("");
-    txtRemarks.setText("");
-    cmbBloodGroup.setSelectedIndex(-1);
-    cmbGender.setSelectedIndex(-1);
-    btnSave.setEnabled(true);
-    btnUpdate.setEnabled(false);
-    btnDelete.setEnabled(false);
-    txtPatientID.requestDefaultFocus();
-}
+
+    private void Reset() {
+        txtPatientID.setText("");
+        txtPatientName.setText("");
+        txtFathername.setText("");
+        txtContactNo.setText("");
+        txtAddress.setText("");
+        txtAge.setText("");
+        txtEmailID.setText("");
+        txtRemarks.setText("");
+        cmbBloodGroup.setSelectedIndex(-1);
+        cmbGender.setSelectedIndex(-1);
+        btnSave.setEnabled(true);
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
+        txtPatientID.requestDefaultFocus();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -308,125 +310,123 @@ private void Reset()
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-    Reset();
+        Reset();
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-     try{
-            con=Connect.ConnectDB();
+        try {
+            con = Connect.ConnectDB();
             if (txtPatientID.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter patient id","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter the patient id", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
 
             }
             if (txtPatientName.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter patient name","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter the patient name", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
 
             }
             if (txtFathername.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter Father's name","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter the Father's name", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (txtAddress.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter address","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter the address", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-           if (txtContactNo.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter contact no.","Error", JOptionPane.ERROR_MESSAGE);
+            if (txtContactNo.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter the contact no.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-         
+
             if (txtAge.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter age","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter the age", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-             if (cmbGender.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please select gender","Error", JOptionPane.ERROR_MESSAGE);
+            if (cmbGender.getSelectedItem().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please select the gender", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (cmbBloodGroup.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please select blood group","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please select the blood group", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-           
-          
-   Statement stmt;
-       stmt= con.createStatement();
-       String sql1="Select PatientID from patientregistration where PatientID= '" + txtPatientID.getText() + "'";
-      rs=stmt.executeQuery(sql1);
-      if(rs.next()){
-        JOptionPane.showMessageDialog( this, "Patient ID already exists","Error", JOptionPane.ERROR_MESSAGE);
-        txtPatientID.setText("");
-        txtPatientID.requestDefaultFocus();
-       return;
-      }
-            String sql= "insert into patientregistration(PatientID,Patientname,FatherName,Email,ContactNo,Age,Remarks,Gen,BG,Address)values('"+ txtPatientID.getText() + "','"+ txtPatientName.getText() + "','"+ txtFathername.getText() + "','"+ txtEmailID.getText() + "','"+ txtContactNo.getText() + "'," + txtAge.getText() + ",'"+ txtRemarks.getText() + "','" + cmbGender.getSelectedItem() + "','"+ cmbBloodGroup.getSelectedItem() + "','" + txtAddress.getText() + "')";
 
-            pst=con.prepareStatement(sql);
+            Statement stmt;
+            stmt = con.createStatement();
+            String sql1 = "Select PatientID from patientregistration where PatientID= '" + txtPatientID.getText() + "'";
+            rs = stmt.executeQuery(sql1);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(this, "Patient ID already exists", "Error", JOptionPane.ERROR_MESSAGE);
+                txtPatientID.setText("");
+                txtPatientID.requestDefaultFocus();
+                return;
+            }
+            String sql = "insert into patientregistration(PatientID,Patientname,FatherName,Email,ContactNo,Age,Remarks,Gen,BG,Address)values('" + txtPatientID.getText() + "','" + txtPatientName.getText() + "','" + txtFathername.getText() + "','" + txtEmailID.getText() + "','" + txtContactNo.getText() + "'," + txtAge.getText() + ",'" + txtRemarks.getText() + "','" + cmbGender.getSelectedItem() + "','" + cmbBloodGroup.getSelectedItem() + "','" + txtAddress.getText() + "')";
+
+            pst = con.prepareStatement(sql);
             pst.execute();
-            JOptionPane.showMessageDialog(this,"Successfully Registered","Patient",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Successfully Registered", "Patient", JOptionPane.INFORMATION_MESSAGE);
             btnSave.setEnabled(false);
 
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-    try{
-            int P = JOptionPane.showConfirmDialog(null," Are you sure want to delete ?","Confirmation",JOptionPane.YES_NO_OPTION);
-            if (P==0)
-            {
-                con=Connect.ConnectDB();
-                String sql= "delete from patientregistration where PatientID = '" + txtPatientID.getText() + "'";
-                pst=con.prepareStatement(sql);
+        try {
+            int P = JOptionPane.showConfirmDialog(null, " Are you sure you wanna delete ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (P == 0) {
+                con = Connect.ConnectDB();
+                String sql = "delete from patientregistration where PatientID = '" + txtPatientID.getText() + "'";
+                pst = con.prepareStatement(sql);
                 pst.execute();
-                JOptionPane.showMessageDialog(this,"Successfully deleted","Record",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Successfully deleted", "Record", JOptionPane.INFORMATION_MESSAGE);
 
                 Reset();
             }
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnGetDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDataActionPerformed
-this.hide();
-PatientRegistrationRecord frm=new PatientRegistrationRecord();
-frm.setVisible(true);
+        this.hide();
+        PatientRegistrationRecord frm = new PatientRegistrationRecord();
+        frm.setVisible(true);
     }//GEN-LAST:event_btnGetDataActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
- try{
-            con=Connect.ConnectDB();
-          
-            String sql= "update patientregistration set Patientname='"+ txtPatientName.getText() + "',Fathername='"+ txtFathername.getText() + "',Email='"+ txtEmailID.getText() + "',ContactNo='"+ txtContactNo.getText() + "',Age=" + txtAge.getText() + ",Remarks='"+ txtRemarks.getText() + "',Gen='" + cmbGender.getSelectedItem() + "',BG='"+ cmbBloodGroup.getSelectedItem() + "',Address='" + txtAddress.getText() + "' where PatientID='" + txtPatientID.getText() + "'";
+        try {
+            con = Connect.ConnectDB();
 
-            pst=con.prepareStatement(sql);
+            String sql = "update patientregistration set Patientname='" + txtPatientName.getText() + "',Fathername='" + txtFathername.getText() + "',Email='" + txtEmailID.getText() + "',ContactNo='" + txtContactNo.getText() + "',Age=" + txtAge.getText() + ",Remarks='" + txtRemarks.getText() + "',Gen='" + cmbGender.getSelectedItem() + "',BG='" + cmbBloodGroup.getSelectedItem() + "',Address='" + txtAddress.getText() + "' where PatientID='" + txtPatientID.getText() + "'";
+
+            pst = con.prepareStatement(sql);
             pst.execute();
-            JOptionPane.showMessageDialog(this,"Successfully updated","Record",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Successfully updated", "Record", JOptionPane.INFORMATION_MESSAGE);
             btnUpdate.setEnabled(false);
 
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
-        }  
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void txtContactNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContactNoKeyTyped
-     char c=evt.getKeyChar();
-      if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
-          getToolkit().beep();
-          evt.consume();
-    }          
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtContactNoKeyTyped
 
     private void txtAgeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgeKeyTyped
-     char c=evt.getKeyChar();
-      if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
-          getToolkit().beep();
-          evt.consume();
-    }          
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtAgeKeyTyped
 
     /**

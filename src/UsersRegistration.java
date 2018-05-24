@@ -12,14 +12,15 @@ import javax.swing.JOptionPane;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  */
 public class UsersRegistration extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
     /**
      * Creates new form UsersRegistration
      */
@@ -27,19 +28,19 @@ PreparedStatement pst=null;
         initComponents();
         setLocationRelativeTo(null);
     }
-    private void Reset()
-{
-    txtName.setText("");
-    txtUserName.setText("");
-    txtPassword.setText("");
-    txtEmailID.setText("");
-    txtContactNo.setText("");
-    Save.setEnabled(true);
-    Delete.setEnabled(false);
-    Update.setEnabled(false);
-    txtUserName.requestDefaultFocus();
-   
-}
+
+    private void Reset() {
+        txtName.setText("");
+        txtUserName.setText("");
+        txtPassword.setText("");
+        txtEmailID.setText("");
+        txtContactNo.setText("");
+        Save.setEnabled(true);
+        Delete.setEnabled(false);
+        Update.setEnabled(false);
+        txtUserName.requestDefaultFocus();
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,6 +68,7 @@ PreparedStatement pst=null;
         txtEmailID = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtContactNo = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("User Registration");
@@ -122,7 +124,7 @@ PreparedStatement pst=null;
                     .addComponent(Save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(GetData, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+                    .addComponent(GetData, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -136,9 +138,9 @@ PreparedStatement pst=null;
                 .addComponent(Delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
                 .addComponent(GetData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(17, 17, 17))
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("User Details"));
@@ -213,138 +215,135 @@ PreparedStatement pst=null;
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-icon.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(22, 22, 22)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void NewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewActionPerformed
-    Reset();
+        Reset();
     }//GEN-LAST:event_NewActionPerformed
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-         try{
-      con=Connect.ConnectDB();
-       if (txtName.getText().equals("")) {
-           JOptionPane.showMessageDialog( this, "Please enter name","Error", JOptionPane.ERROR_MESSAGE);
-           return;
+        try {
+            con = Connect.ConnectDB();
+            if (txtName.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter the name", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-        if (txtUserName.getText().equals("")) {
-           JOptionPane.showMessageDialog( this, "Please enter user name","Error", JOptionPane.ERROR_MESSAGE);
-           return;
+            if (txtUserName.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter the user name", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-        String Password= String.valueOf(txtPassword.getPassword());
-         if (Password.equals("")) {
-           JOptionPane.showMessageDialog( this, "Please enter password","Error", JOptionPane.ERROR_MESSAGE);
-           return;
+            String Password = String.valueOf(txtPassword.getPassword());
+            if (Password.equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter the password", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-          if (txtContactNo.getText().equals("")) {
-           JOptionPane.showMessageDialog( this, "Please enter contact no.","Error", JOptionPane.ERROR_MESSAGE);
-           return;
+            if (txtContactNo.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter the contact number.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-          
-       Statement stmt;
-       stmt= con.createStatement();
-       String sql1="Select username from Registration where Username= '" + txtUserName.getText() + "'";
-      rs=stmt.executeQuery(sql1);
-      if(rs.next()){
-        JOptionPane.showMessageDialog( this, "User name already exists","Error", JOptionPane.ERROR_MESSAGE);
-        txtUserName.setText("");
-        txtUserName.requestDefaultFocus();
-       return;
-   }
-       String Password1= String.valueOf(txtPassword.getPassword());
-       String sql= "insert into Registration(username,password,nameofuser,Email,ContactNo)values('"+ txtUserName.getText() + "','" + Password1 + "','" + txtName.getText() + "','" + txtEmailID.getText() + "','" + txtContactNo.getText() + "')";
-      
-      pst=con.prepareStatement(sql);
-      pst.execute();
-       String sql2= "insert into Users(username,user_password)values('" + txtUserName.getText() + "','" + Password1 + "')";
-      
-      pst=con.prepareStatement(sql2);
-      pst.execute();
-      JOptionPane.showMessageDialog(this,"Successfully Registered","User",JOptionPane.INFORMATION_MESSAGE); 
-      Save.setEnabled(false);
-        }catch(HeadlessException | SQLException ex){
-           JOptionPane.showMessageDialog(this,ex); 
-                }
+
+            Statement stmt;
+            stmt = con.createStatement();
+            String sql1 = "Select username from users where Username= '" + txtUserName.getText() + "'";
+            rs = stmt.executeQuery(sql1);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(this, "Username already exists", "Error", JOptionPane.ERROR_MESSAGE);
+                txtUserName.setText("");
+                txtUserName.requestDefaultFocus();
+                return;
+            }
+            String myPassword1 = String.valueOf(txtPassword.getPassword());
+            String salt = PasswordUtils.getSalt(30);
+            String mySecurePassword1 = PasswordUtils.generateSecurePassword(myPassword1, salt);
+            String sql = "insert into users(username,password,nameofuser,Email,ContactNo,salt)values('" + txtUserName.getText() + "','" + mySecurePassword1 + "','" + txtName.getText() + "','" + txtEmailID.getText() + "','" + txtContactNo.getText() + "','" + salt + "')";
+
+            pst = con.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(this, "Successfully Registered", "User", JOptionPane.INFORMATION_MESSAGE);
+            Save.setEnabled(false);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
     }//GEN-LAST:event_SaveActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
-          try
-          {
-        int P = JOptionPane.showConfirmDialog(null," Are you sure want to delete ?","Confirmation",JOptionPane.YES_NO_OPTION);
-     if (P==0)
-     {
-        con=Connect.ConnectDB();
-       
-        String sql= "delete from Registration where Username = '" + txtUserName.getText() + "'";
-        pst=con.prepareStatement(sql);
-        pst.execute();  
-         String sql1= "delete from Users where Username = '" + txtUserName.getText() + "'";
-        pst=con.prepareStatement(sql1);
-        pst.execute(); 
-        JOptionPane.showMessageDialog(this,"Successfully deleted","Record",JOptionPane.INFORMATION_MESSAGE); 
-        Reset();
-     }
-      }catch(HeadlessException | SQLException ex){
-           JOptionPane.showMessageDialog(this,ex); 
-                }
-         
+        try {
+            int P = JOptionPane.showConfirmDialog(null, " Are you sure you wanna delete ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (P == 0) {
+                con = Connect.ConnectDB();
+
+                String sql = "delete from users where Username = '" + txtUserName.getText() + "'";
+                pst = con.prepareStatement(sql);
+                pst.execute();
+                JOptionPane.showMessageDialog(this, "Successfully deleted", "Record", JOptionPane.INFORMATION_MESSAGE);
+                Reset();
+            }
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
+
     }//GEN-LAST:event_DeleteActionPerformed
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
-    try{
-      con=Connect.ConnectDB();
-     String Password1= String.valueOf(txtPassword.getPassword());
-       String sql= "update Registration set password='" + Password1 + "',nameofuser='" + txtName.getText() + "',Email='" + txtEmailID.getText() + "',ContactNo='" + txtContactNo.getText() + "' where Username='" + txtUserName.getText() + "'";
-      
-      pst=con.prepareStatement(sql);
-      pst.execute();
-       String sql2= "update Users set user_password='" + Password1 + "' where username='" + txtUserName.getText() + "'";
-      
-      pst=con.prepareStatement(sql2);
-      pst.execute();
-      JOptionPane.showMessageDialog(this,"Successfully updated","User info",JOptionPane.INFORMATION_MESSAGE); 
-      Update.setEnabled(false);
-        }catch(HeadlessException | SQLException ex){
-           JOptionPane.showMessageDialog(this,ex); 
-                }
+        try {
+            con = Connect.ConnectDB();
+            String Password = String.valueOf(txtPassword.getPassword());
+            String sql = "update users set password='" + Password + "',nameofuser='" + txtName.getText() + "',Email='" + txtEmailID.getText() + "',ContactNo='" + txtContactNo.getText() + "' where Username='" + txtUserName.getText() + "'";
+
+            pst = con.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(this, "Successfully updated", "User info", JOptionPane.INFORMATION_MESSAGE);
+            Update.setEnabled(false);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
     }//GEN-LAST:event_UpdateActionPerformed
 
     private void GetDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GetDataActionPerformed
-      this.hide();
-      UsersRegistrationRecord frm = new UsersRegistrationRecord();
-      frm.setVisible(true); 
+        this.hide();
+        UsersRegistrationRecord frm = new UsersRegistrationRecord();
+        frm.setVisible(true);
     }//GEN-LAST:event_GetDataActionPerformed
 
     private void txtContactNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContactNoKeyTyped
-   char c=evt.getKeyChar();
-      if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
-          getToolkit().beep();
-          evt.consume();
-    }          
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtContactNoKeyTyped
 
     /**
@@ -393,6 +392,7 @@ PreparedStatement pst=null;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public javax.swing.JTextField txtContactNo;

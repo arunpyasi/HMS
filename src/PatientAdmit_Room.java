@@ -12,14 +12,15 @@ import net.proteanit.sql.DbUtils;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  */
 public class PatientAdmit_Room extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
     /**
      * Creates new form PatientAdmit_Room
      */
@@ -30,49 +31,53 @@ PreparedStatement pst=null;
         cmbRoomNo.setSelectedIndex(-1);
         cmbRoomNo1.setVisible(false);
         txtAdmitID.setVisible(false);
-         Get_Data1();
-         GetRecord();
+        Get_Data1();
+        GetRecord();
     }
-private void fillcombo()
-{
-     try{
-      
-   con=Connect.ConnectDB();
-      String sql= "select distinct RoomNo from room order by RoomNo";
-      pst=con.prepareStatement(sql);
-      rs=pst.executeQuery();
-      while(rs.next()){
-          String add=rs.getString("RoomNo");
-          cmbRoomNo.addItem(add);
-          
-         }
-        }catch(HeadlessException | SQLException ex){
-           JOptionPane.showMessageDialog(this,ex); 
+
+    private void fillcombo() {
+        try {
+
+            con = Connect.ConnectDB();
+            String sql = "select distinct RoomNo from room order by RoomNo";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                String add = rs.getString("RoomNo");
+                cmbRoomNo.addItem(add);
+
+            }
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
-}
- private void GetRecord(){
-        String sql="select DoctorID as 'Doctor ID', DoctorName as 'Doctor Name' from doctor order by DoctorName";  try{
-          con=Connect.ConnectDB();
-         pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
-         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
-         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-          
-}
     }
-  private void Get_Data1(){
-        String sql="select PatientID as 'Patient ID', PatientName as 'Patient Name',Gen as 'Gender',BG as 'Blood Group' from patientregistration order by PatientName";
-        try{
-         con=Connect.ConnectDB();
-         pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
-         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
-         }catch(Exception e){
+
+    private void GetRecord() {
+        String sql = "select DoctorID as 'Doctor ID', DoctorName as 'Doctor Name' from doctor order by DoctorName";
+        try {
+            con = Connect.ConnectDB();
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-          
-}
+
+        }
     }
+
+    private void Get_Data1() {
+        String sql = "select PatientID as 'Patient ID', PatientName as 'Patient Name',Gen as 'Gender',BG as 'Blood Group' from patientregistration order by PatientName";
+        try {
+            con = Connect.ConnectDB();
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,6 +122,7 @@ private void fillcombo()
         btnUpdate = new javax.swing.JButton();
         btnGetData = new javax.swing.JButton();
         txtAdmitID = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Admit Patient");
@@ -375,6 +381,8 @@ private void fillcombo()
 
         txtAdmitID.setEditable(false);
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/patients-icon.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -382,16 +390,23 @@ private void fillcombo()
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtAdmitID, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtAdmitID, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,11 +416,17 @@ private void fillcombo()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtAdmitID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -415,228 +436,224 @@ private void fillcombo()
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbRoomNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRoomNoActionPerformed
-  
+
     }//GEN-LAST:event_cmbRoomNoActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-          try{
-            con=Connect.ConnectDB();
-            int row= jTable1.getSelectedRow();
-            String table_click= jTable1.getModel().getValueAt(row, 0).toString();
-            String sql= "select * from patientregistration where PatientID = '" + table_click + "'";
-            pst=con.prepareStatement(sql);
-            rs=  pst.executeQuery();
-            if(rs.next()){
-       
-                String add1=rs.getString("PatientID");
+        try {
+            con = Connect.ConnectDB();
+            int row = jTable1.getSelectedRow();
+            String table_click = jTable1.getModel().getValueAt(row, 0).toString();
+            String sql = "select * from patientregistration where PatientID = '" + table_click + "'";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+
+                String add1 = rs.getString("PatientID");
                 PatientID.setText(add1);
-                String add2=rs.getString("Patientname");
+                String add2 = rs.getString("Patientname");
                 txtPatientName.setText(add2);
-                String add9=rs.getString("BG");
+                String add9 = rs.getString("BG");
                 txtBloodGroup.setText(add9);
-                String add11=rs.getString("Gen");
+                String add11 = rs.getString("Gen");
                 txtGender.setText(add11);
-                         
+
             }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        try{
-            con=Connect.ConnectDB();
-            int row= jTable2.getSelectedRow();
-            String table_click= jTable2.getModel().getValueAt(row, 0).toString();
-            String sql= "select * from doctor where DoctorID = '" + table_click + "'";
-            pst=con.prepareStatement(sql);
-            rs=  pst.executeQuery();
-            if(rs.next()){
-                String add1=rs.getString("DoctorID");
+        try {
+            con = Connect.ConnectDB();
+            int row = jTable2.getSelectedRow();
+            String table_click = jTable2.getModel().getValueAt(row, 0).toString();
+            String sql = "select * from doctor where DoctorID = '" + table_click + "'";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                String add1 = rs.getString("DoctorID");
                 txtDoctorID.setText(add1);
-                String add2=rs.getString("Doctorname");
+                String add2 = rs.getString("Doctorname");
                 txtDoctorName.setText(add2);
             }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-    Reset();
+        Reset();
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-      try{
-            con=Connect.ConnectDB();
-              if (PatientID.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please retrieve Patient ID","Error", JOptionPane.ERROR_MESSAGE);
+        try {
+            con = Connect.ConnectDB();
+            if (PatientID.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please retrieve Patient ID", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (txtPatientName.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please retrieve Patient Name","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please retrieve Patient Name", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-           if (txtGender.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please retrieve Gender","Error", JOptionPane.ERROR_MESSAGE);
+            if (txtGender.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please retrieve Gender", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-         
+
             if (txtBloodGroup.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please retrieve blood group","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please retrieve blood group", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (txtDisease.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter disease","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter disease", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-             if (txtAdmitDate.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter admit date","Error", JOptionPane.ERROR_MESSAGE);
+            if (txtAdmitDate.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter admit date", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (cmbRoomNo.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please select room no.","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please select room no.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-  
+
             if (txtDoctorID.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please retrieve doctor id","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please retrieve doctor id", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
 
             }
             if (txtDoctorName.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter retrieve doctor name","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter retrieve doctor name", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
 
             }
-             Statement stmt1;
-       stmt1= con.createStatement();
-       String sql2="Select RoomNo from room where RoomNo= '" + cmbRoomNo.getSelectedItem()+ "' and RoomStatus='Booked'";
-      rs=stmt1.executeQuery(sql2);
-      if(rs.next()){
-        JOptionPane.showMessageDialog( this, "Room is already booked","Error", JOptionPane.ERROR_MESSAGE);
-        cmbRoomNo.setSelectedItem("");
-        cmbRoomNo.requestDefaultFocus();
-       return;
-      }
-       Statement stmt;
-       stmt= con.createStatement();
-       String sql1="Select PatientID,AdmitDate from admitpatient_room where PatientID= '" + PatientID.getText() + "' and AdmitDate='" + txtAdmitDate + "'";
-      rs=stmt.executeQuery(sql1);
-      if(rs.next()){
-        JOptionPane.showMessageDialog( this, "Record already exists","Error", JOptionPane.ERROR_MESSAGE);
-        return;
-      }
-     
-            String sql= "insert into admitpatient_room(PatientID,Disease,AdmitDate,RoomNo,DoctorID,AP_Remarks)values('"+ PatientID.getText() + "','"+ txtDisease.getText() + "','"+ txtAdmitDate.getText() + "','"+ cmbRoomNo.getSelectedItem()+ "','" + txtDoctorID.getText() + "','"+ txtRemarks.getText() + "')";
+            Statement stmt1;
+            stmt1 = con.createStatement();
+            String sql2 = "Select RoomNo from room where RoomNo= '" + cmbRoomNo.getSelectedItem() + "' and RoomStatus='Booked'";
+            rs = stmt1.executeQuery(sql2);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(this, "Room is already booked", "Error", JOptionPane.ERROR_MESSAGE);
+                cmbRoomNo.setSelectedItem("");
+                cmbRoomNo.requestDefaultFocus();
+                return;
+            }
+            Statement stmt;
+            stmt = con.createStatement();
+            String sql1 = "Select PatientID,AdmitDate from admitpatient_room where PatientID= '" + PatientID.getText() + "' and AdmitDate='" + txtAdmitDate + "'";
+            rs = stmt.executeQuery(sql1);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(this, "Record already exists", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-            pst=con.prepareStatement(sql);
+            String sql = "insert into admitpatient_room(PatientID,Disease,AdmitDate,RoomNo,DoctorID,AP_Remarks)values('" + PatientID.getText() + "','" + txtDisease.getText() + "','" + txtAdmitDate.getText() + "','" + cmbRoomNo.getSelectedItem() + "','" + txtDoctorID.getText() + "','" + txtRemarks.getText() + "')";
+
+            pst = con.prepareStatement(sql);
             pst.execute();
-            String sql3= "update room set RoomStatus='Booked' where RoomNo='" + cmbRoomNo.getSelectedItem() + "'";
-            pst=con.prepareStatement(sql3);
+            String sql3 = "update room set RoomStatus='Booked' where RoomNo='" + cmbRoomNo.getSelectedItem() + "'";
+            pst = con.prepareStatement(sql3);
             pst.execute();
-            JOptionPane.showMessageDialog(this,"Successfully admitted","Patient",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Successfully admitted", "Patient", JOptionPane.INFORMATION_MESSAGE);
             btnSave.setEnabled(false);
 
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void cmbRoomNoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbRoomNoItemStateChanged
-     
+
     }//GEN-LAST:event_cmbRoomNoItemStateChanged
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-       try{
-            int P = JOptionPane.showConfirmDialog(null," Are you sure want to delete ?","Confirmation",JOptionPane.YES_NO_OPTION);
-            if (P==0)
-            {
-                con=Connect.ConnectDB();
-                String sql= "delete from admitpatient_room where AdmitID = " + txtAdmitID.getText() + "";
-                pst=con.prepareStatement(sql);
+        try {
+            int P = JOptionPane.showConfirmDialog(null, " Are you sure want to delete ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (P == 0) {
+                con = Connect.ConnectDB();
+                String sql = "delete from admitpatient_room where AdmitID = " + txtAdmitID.getText() + "";
+                pst = con.prepareStatement(sql);
                 pst.execute();
-                JOptionPane.showMessageDialog(this,"Successfully deleted","Record",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Successfully deleted", "Record", JOptionPane.INFORMATION_MESSAGE);
 
                 Reset();
             }
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnGetDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDataActionPerformed
-  this.hide();
-  PatientAdmit_RoomRecord frm= new PatientAdmit_RoomRecord();
-  frm.setVisible(true);
+        this.hide();
+        PatientAdmit_RoomRecord frm = new PatientAdmit_RoomRecord();
+        frm.setVisible(true);
     }//GEN-LAST:event_btnGetDataActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-    try{
-       
-            con=Connect.ConnectDB();
-      
-       Statement stmt1;
-       stmt1= con.createStatement();
-      String s= cmbRoomNo.getSelectedItem().toString();
-       String t= cmbRoomNo1.getSelectedItem().toString();
-       if (!t.equals(s))
-       {
-       String sql2="Select RoomNo from room where RoomNo= '" + cmbRoomNo.getSelectedItem()+ "' and RoomStatus='Booked'";
-       rs=stmt1.executeQuery(sql2);
-       if(rs.next()){
-        JOptionPane.showMessageDialog( this, "Room is already booked","Error", JOptionPane.ERROR_MESSAGE);
-        cmbRoomNo.setSelectedItem("");
-        cmbRoomNo.requestDefaultFocus();
-       return;
-      }
-      }
-      
-            String sql= " update admitpatient_room set  PatientID='"+ PatientID.getText() + "',Disease='"+ txtDisease.getText() + "',AdmitDate='"+ txtAdmitDate.getText() + "',RoomNo='"+ cmbRoomNo.getSelectedItem()+ "',DoctorID='" + txtDoctorID.getText() + "',AP_Remarks='"+ txtRemarks.getText() + "' where AdmitID= " + txtAdmitID.getText() + "";
-            pst=con.prepareStatement(sql);
+        try {
+
+            con = Connect.ConnectDB();
+
+            Statement stmt1;
+            stmt1 = con.createStatement();
+            String s = cmbRoomNo.getSelectedItem().toString();
+            String t = cmbRoomNo1.getSelectedItem().toString();
+            if (!t.equals(s)) {
+                String sql2 = "Select RoomNo from room where RoomNo= '" + cmbRoomNo.getSelectedItem() + "' and RoomStatus='Booked'";
+                rs = stmt1.executeQuery(sql2);
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(this, "Room is already booked", "Error", JOptionPane.ERROR_MESSAGE);
+                    cmbRoomNo.setSelectedItem("");
+                    cmbRoomNo.requestDefaultFocus();
+                    return;
+                }
+            }
+
+            String sql = " update admitpatient_room set  PatientID='" + PatientID.getText() + "',Disease='" + txtDisease.getText() + "',AdmitDate='" + txtAdmitDate.getText() + "',RoomNo='" + cmbRoomNo.getSelectedItem() + "',DoctorID='" + txtDoctorID.getText() + "',AP_Remarks='" + txtRemarks.getText() + "' where AdmitID= " + txtAdmitID.getText() + "";
+            pst = con.prepareStatement(sql);
             pst.execute();
-       
-          if (!t.equals(s))
-       {
-            String sql3= "update room set RoomStatus='Booked' where RoomNo='" + cmbRoomNo.getSelectedItem() + "'";
-            pst=con.prepareStatement(sql3);
-            pst.execute();
-       }
- 
-       if (!t.equals(s))
-       {
-            String sql4= "update room set RoomStatus='Vacant' where RoomNo='" + cmbRoomNo1.getSelectedItem() + "'";
-            pst=con.prepareStatement(sql4);
-            pst.execute();
-       }
-            JOptionPane.showMessageDialog(this,"Successfully updated","Patient Record",JOptionPane.INFORMATION_MESSAGE);
+
+            if (!t.equals(s)) {
+                String sql3 = "update room set RoomStatus='Booked' where RoomNo='" + cmbRoomNo.getSelectedItem() + "'";
+                pst = con.prepareStatement(sql3);
+                pst.execute();
+            }
+
+            if (!t.equals(s)) {
+                String sql4 = "update room set RoomStatus='Vacant' where RoomNo='" + cmbRoomNo1.getSelectedItem() + "'";
+                pst = con.prepareStatement(sql4);
+                pst.execute();
+            }
+            JOptionPane.showMessageDialog(this, "Successfully updated", "Patient Record", JOptionPane.INFORMATION_MESSAGE);
             btnUpdate.setEnabled(false);
 
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-      
+
     }//GEN-LAST:event_formWindowClosing
-private void Reset()
-{
-    txtDoctorID.setText("");
-    txtDoctorName.setText("");
-    PatientID.setText("");
-    txtPatientName.setText("");
-    txtBloodGroup.setText("");
-    txtGender.setText("");
-    txtDisease.setText("");
-    txtAdmitDate.setText("");
-    
-    txtRemarks.setText("");
-    cmbRoomNo.setSelectedIndex(-1);
-    btnSave.setEnabled(true);
-    btnUpdate.setEnabled(false);
-    btnDelete.setEnabled(false);
+    private void Reset() {
+        txtDoctorID.setText("");
+        txtDoctorName.setText("");
+        PatientID.setText("");
+        txtPatientName.setText("");
+        txtBloodGroup.setText("");
+        txtGender.setText("");
+        txtDisease.setText("");
+        txtAdmitDate.setText("");
+
+        txtRemarks.setText("");
+        cmbRoomNo.setSelectedIndex(-1);
+        btnSave.setEnabled(true);
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -690,6 +707,7 @@ private void Reset()
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

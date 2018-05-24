@@ -9,30 +9,35 @@
 import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
+
 public class UsersRegistrationRecord extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
     /**
      * Creates new form UsersRegistrationRecord
      */
     public UsersRegistrationRecord() {
         initComponents();
-        con= Connect.ConnectDB();
+        con = Connect.ConnectDB();
         Get_Data();
         setLocationRelativeTo(null);
     }
-  private void Get_Data(){
-        String sql="select NameOfUser as 'Name', UserName as 'User Name',Password,ContactNo as 'Contact No',Email as 'Email ID' from Registration";
-        try{
-         pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
-         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
-         }catch(Exception e){
+
+    private void Get_Data() {
+        String sql = "select NameOfUser as 'Name', UserName as 'User Name',Password,ContactNo as 'Contact No',Email as 'Email ID' from users";
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-          
-}
+
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,41 +94,41 @@ PreparedStatement pst=null;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-             try{
-            con=Connect.ConnectDB();
-            int row= jTable1.getSelectedRow();
-            String table_click= jTable1.getModel().getValueAt(row, 1).toString();
-            String sql= "select * from registration where username= '" + table_click + "'";
-            pst=con.prepareStatement(sql);
-            rs=  pst.executeQuery();
-            if(rs.next()){
+        try {
+            con = Connect.ConnectDB();
+            int row = jTable1.getSelectedRow();
+            String table_click = jTable1.getModel().getValueAt(row, 1).toString();
+            String sql = "select * from users where username= '" + table_click + "'";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
                 this.hide();
                 UsersRegistration frm = new UsersRegistration();
                 frm.setVisible(true);
-                String add1=rs.getString("Username");
+                String add1 = rs.getString("Username");
                 frm.txtUserName.setText(add1);
-                String add2=rs.getString("Password");
+                String add2 = rs.getString("Password");
                 frm.txtPassword.setText(add2);
-                String add3=rs.getString("NameOfUser");
+                String add3 = rs.getString("NameOfUser");
                 frm.txtName.setText(add3);
-                String add4=rs.getString("ContactNo");
+                String add4 = rs.getString("ContactNo");
                 frm.txtContactNo.setText(add4);
-                String add5=rs.getString("Email");
+                String add5 = rs.getString("Email");
                 frm.txtEmailID.setText(add5);
                 frm.Save.setEnabled(false);
                 frm.Delete.setEnabled(true);
                 frm.Update.setEnabled(true);
             }
-          
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this,ex);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-  this.hide();
-  UsersRegistration frm = new UsersRegistration();
-  frm.setVisible(true);
+        this.hide();
+        UsersRegistration frm = new UsersRegistration();
+        frm.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     /**

@@ -13,14 +13,15 @@ import net.proteanit.sql.DbUtils;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  */
 public class Bill_Ward extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
     /**
      * Creates new form Bill_Room
      */
@@ -570,192 +571,192 @@ PreparedStatement pst=null;
         PatientDischargeRecord_Ward1 frm = new PatientDischargeRecord_Ward1();
         frm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-private void Reset()
-{
-    txtDoctorID.setText("");
-    txtDoctorName.setText("");
-    PatientID.setText("");
-    txtPatientName.setText("");
-    txtBloodGroup.setText("");
-    txtGender.setText("");
-    txtDisease.setText("");
-    txtAdmitDate.setText("");
-    txtWardname.setText("");
-    txtServiceCharges.setText("");
-    txtBedCharges.setText("");
-    txtPaymentModeDetails.setText("");
-    txtTotalCharges.setText("");
-    txtTotalPaid.setText("");
-    txtDueCharges.setText("");
-    txtBillingDate.setText("");
-    cmbPaymentMode.setSelectedIndex(-1);
-    txtDischargeDate.setText("");
-    txtNoOfDays.setText("");
-    txtTotalBedCharges.setText("");
-    btnSave.setEnabled(true);
-    btnUpdate.setEnabled(false);
-    btnDelete.setEnabled(false);
+    private void Reset() {
+        txtDoctorID.setText("");
+        txtDoctorName.setText("");
+        PatientID.setText("");
+        txtPatientName.setText("");
+        txtBloodGroup.setText("");
+        txtGender.setText("");
+        txtDisease.setText("");
+        txtAdmitDate.setText("");
+        txtWardname.setText("");
+        txtServiceCharges.setText("");
+        txtBedCharges.setText("");
+        txtPaymentModeDetails.setText("");
+        txtTotalCharges.setText("");
+        txtTotalPaid.setText("");
+        txtDueCharges.setText("");
+        txtBillingDate.setText("");
+        cmbPaymentMode.setSelectedIndex(-1);
+        txtDischargeDate.setText("");
+        txtNoOfDays.setText("");
+        txtTotalBedCharges.setText("");
+        btnSave.setEnabled(true);
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
     }
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-          try{
-            con=Connect.ConnectDB();
-            int row= jTable1.getSelectedRow();
-            String val =jTable1.getModel().getValueAt(row,2).toString();
+        try {
+            con = Connect.ConnectDB();
+            int row = jTable1.getSelectedRow();
+            String val = jTable1.getModel().getValueAt(row, 2).toString();
             txtServiceCharges.setText(val);
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-    Reset();
+        Reset();
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void txtBedChargesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBedChargesActionPerformed
-              
+
     }//GEN-LAST:event_txtBedChargesActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-      try{
-            int P = JOptionPane.showConfirmDialog(null," Are you sure want to delete ?","Confirmation",JOptionPane.YES_NO_OPTION);
-            if (P==0)
-            {
-                con=Connect.ConnectDB();
-                String sql= "delete from bill_ward where BillNo = " + txtBillNo.getText() + "";
-                pst=con.prepareStatement(sql);
+        try {
+            int P = JOptionPane.showConfirmDialog(null, " Are you sure you wanna delete ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (P == 0) {
+                con = Connect.ConnectDB();
+                String sql = "delete from bill_ward where BillNo = " + txtBillNo.getText() + "";
+                pst = con.prepareStatement(sql);
                 pst.execute();
-                JOptionPane.showMessageDialog(this,"Successfully deleted","Record",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Successfully deleted", "Record", JOptionPane.INFORMATION_MESSAGE);
 
                 Reset();
             }
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void txtBedChargesInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtBedChargesInputMethodTextChanged
-      
+
     }//GEN-LAST:event_txtBedChargesInputMethodTextChanged
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-      try{
-            con=Connect.ConnectDB();
-              if (PatientID.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please retrieve Patient ID","Error", JOptionPane.ERROR_MESSAGE);
+        try {
+            con = Connect.ConnectDB();
+            if (PatientID.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please get Patient ID", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (txtNoOfDays.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter no. of days","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter the number of days", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-           if (txtServiceCharges.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please retrieve service charges","Error", JOptionPane.ERROR_MESSAGE);
+            if (txtServiceCharges.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please get the service charges", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-         
+
             if (txtBillingDate.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter billing date","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter the billing date", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (txtTotalPaid.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter total paid","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter the total paid", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-                double add1 = Double.parseDouble(txtTotalCharges.getText());
-                double add2 = Double.parseDouble(txtTotalPaid.getText());
-             if (add2 > add1) {
-                JOptionPane.showMessageDialog( this, "Total Paid is more than total Charges","Error", JOptionPane.ERROR_MESSAGE);
+            double add1 = Double.parseDouble(txtTotalCharges.getText());
+            double add2 = Double.parseDouble(txtTotalPaid.getText());
+            if (add2 > add1) {
+                JOptionPane.showMessageDialog(this, "Total Paid is more than total Charges", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        Statement stmt;
-       stmt= con.createStatement();
-       String sql1="Select DischargeID from bill_ward where DischargeID= " + txtDischargeID.getText() + "";
-      rs=stmt.executeQuery(sql1);
-      if(rs.next()){
-        JOptionPane.showMessageDialog( this, "Record already exists","Error", JOptionPane.ERROR_MESSAGE);
-        return;
-      }
-     
-            String sql= "insert into bill_ward(DischargeID,BillingDate,BedCharges,ServiceCharges,PaymentMode,PaymentModeDetails,ChargesPaid,DueCharges,TotalCharges,NoOfDays,TotalBedCharges)values(" + txtDischargeID.getText() + ",'"+ txtBillingDate.getText() + "',"+ txtBedCharges.getText() + ","+ txtServiceCharges.getText() + ",'" + cmbPaymentMode.getSelectedItem()+ "','" + txtPaymentModeDetails.getText() + "',"+ txtTotalPaid.getText() + ","+ txtDueCharges.getText() + ","+ txtTotalCharges.getText() +","+ txtNoOfDays.getText() + "," + txtTotalBedCharges.getText() +")";
-            pst=con.prepareStatement(sql);
+            Statement stmt;
+            stmt = con.createStatement();
+            String sql1 = "Select DischargeID from bill_ward where DischargeID= " + txtDischargeID.getText() + "";
+            rs = stmt.executeQuery(sql1);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(this, "Record already exists", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String sql = "insert into bill_ward(DischargeID,BillingDate,BedCharges,ServiceCharges,PaymentMode,PaymentModeDetails,ChargesPaid,DueCharges,TotalCharges,NoOfDays,TotalBedCharges)values(" + txtDischargeID.getText() + ",'" + txtBillingDate.getText() + "'," + txtBedCharges.getText() + "," + txtServiceCharges.getText() + ",'" + cmbPaymentMode.getSelectedItem() + "','" + txtPaymentModeDetails.getText() + "'," + txtTotalPaid.getText() + "," + txtDueCharges.getText() + "," + txtTotalCharges.getText() + "," + txtNoOfDays.getText() + "," + txtTotalBedCharges.getText() + ")";
+            pst = con.prepareStatement(sql);
             pst.execute();
-            JOptionPane.showMessageDialog(this,"Successfully saved","Record",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Successfully saved", "Record", JOptionPane.INFORMATION_MESSAGE);
             btnSave.setEnabled(false);
 
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        try{
-            con=Connect.ConnectDB();
-            String sql= "update bill_ward set DischargeID="+ txtDischargeID.getText() + ",BillingDate='"+ txtBillingDate.getText() + "',BedCharges="+ txtBedCharges.getText() + ",ServiceCharges="+ txtServiceCharges.getText() + ",PaymentMode='" + cmbPaymentMode.getSelectedItem()+ "',PaymentModeDetails='" + txtPaymentModeDetails.getText() + "',ChargesPaid="+ txtTotalPaid.getText() + ",DueCharges="+ txtDueCharges.getText() + ",TotalCharges="+ txtTotalCharges.getText() + ",NoOfDays="+ txtNoOfDays.getText() +",TotalBedCharges=" + txtTotalBedCharges.getText() + " where BillNo= " + txtBillNo.getText() +"";  pst=con.prepareStatement(sql);
+        try {
+            con = Connect.ConnectDB();
+            String sql = "update bill_ward set DischargeID=" + txtDischargeID.getText() + ",BillingDate='" + txtBillingDate.getText() + "',BedCharges=" + txtBedCharges.getText() + ",ServiceCharges=" + txtServiceCharges.getText() + ",PaymentMode='" + cmbPaymentMode.getSelectedItem() + "',PaymentModeDetails='" + txtPaymentModeDetails.getText() + "',ChargesPaid=" + txtTotalPaid.getText() + ",DueCharges=" + txtDueCharges.getText() + ",TotalCharges=" + txtTotalCharges.getText() + ",NoOfDays=" + txtNoOfDays.getText() + ",TotalBedCharges=" + txtTotalBedCharges.getText() + " where BillNo= " + txtBillNo.getText() + "";
+            pst = con.prepareStatement(sql);
             pst.execute();
-            JOptionPane.showMessageDialog(this,"Successfully Updated","Record",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Successfully Updated", "Record", JOptionPane.INFORMATION_MESSAGE);
             btnUpdate.setEnabled(false);
 
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void txtNoOfDaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoOfDaysActionPerformed
-             
-                double add1 = Double.parseDouble(txtBedCharges.getText());
-                double add = Double.parseDouble(txtNoOfDays.getText());
-                double add2= add * add1;
-                String add3= Double.toString(add2);
-                txtTotalBedCharges.setText(add3);      
-                double add4=Double.parseDouble(txtTotalBedCharges.getText());
-                double add5 = Double.parseDouble(txtServiceCharges.getText());
-                double add6= add4 + add5;
-                 String add7= Double.toString(add6);
-                txtTotalCharges.setText(add7);
+
+        double add1 = Double.parseDouble(txtBedCharges.getText());
+        double add = Double.parseDouble(txtNoOfDays.getText());
+        double add2 = add * add1;
+        String add3 = Double.toString(add2);
+        txtTotalBedCharges.setText(add3);
+        double add4 = Double.parseDouble(txtTotalBedCharges.getText());
+        double add5 = Double.parseDouble(txtServiceCharges.getText());
+        double add6 = add4 + add5;
+        String add7 = Double.toString(add6);
+        txtTotalCharges.setText(add7);
     }//GEN-LAST:event_txtNoOfDaysActionPerformed
 
     private void txtTotalPaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalPaidActionPerformed
-                double add1 = Double.parseDouble(txtTotalCharges.getText());
-                double add = Double.parseDouble(txtTotalPaid.getText());
-                double add2= add1 - add;
-                String add3= Double.toString(add2);
-                txtDueCharges.setText(add3);  
+        double add1 = Double.parseDouble(txtTotalCharges.getText());
+        double add = Double.parseDouble(txtTotalPaid.getText());
+        double add2 = add1 - add;
+        String add3 = Double.toString(add2);
+        txtDueCharges.setText(add3);
     }//GEN-LAST:event_txtTotalPaidActionPerformed
 
     private void btnGetDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDataActionPerformed
-  this.hide();
-  Bill_WardRecord frm= new Bill_WardRecord();
-  frm.setVisible(true);
+        this.hide();
+        Bill_WardRecord frm = new Bill_WardRecord();
+        frm.setVisible(true);
     }//GEN-LAST:event_btnGetDataActionPerformed
 
     private void txtNoOfDaysKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoOfDaysKeyTyped
-     char c=evt.getKeyChar();
-      if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
-          getToolkit().beep();
-          evt.consume();
-    }                       
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNoOfDaysKeyTyped
 
     private void txtTotalPaidKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalPaidKeyTyped
- char c=evt.getKeyChar();
-      if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
-          getToolkit().beep();
-          evt.consume();
-    }                       
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtTotalPaidKeyTyped
 
-    private void Get_Data1(){
-      try{
-        con=Connect.ConnectDB();
-       String sql="select patientregistration.PatientID as 'Patient ID', PatientName as 'Patient Name',sum(serviceCharges) as 'Service Charges' from services,patientregistration where services.PatientID=patientregistration.PatientID group by patientregistration.PatientID,PatientName order by PatientName";
-         pst=con.prepareStatement(sql);
-         rs= pst.executeQuery();
-         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
-         }catch(Exception e){
+    private void Get_Data1() {
+        try {
+            con = Connect.ConnectDB();
+            String sql = "select patientregistration.PatientID as 'Patient ID', PatientName as 'Patient Name',sum(serviceCharges) as 'Service Charges' from services,patientregistration where services.PatientID=patientregistration.PatientID group by patientregistration.PatientID,PatientName order by PatientName";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-          
-}
+
+        }
     }
+
     /**
      * @param args the command line arguments
      */

@@ -699,3 +699,4 @@ private void Reset()
     public javax.swing.JTextArea txtRemarks;
     // End of variables declaration//GEN-END:variables
 }
+
